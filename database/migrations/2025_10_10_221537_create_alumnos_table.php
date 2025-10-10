@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('fecha_nacimiento');
             $table->enum('sexo',['M','F']);
             $table->string('carrera');
-            $table->timestamps();
+        $table->timestamps();
         });
     }
 

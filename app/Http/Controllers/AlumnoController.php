@@ -12,7 +12,8 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        //
+        $alumnos = Alumno::all(); // Trae todos los registros de la tabla alumnos
+        return view('alumnos.index', compact('alumnos')); // Manda los datos a la vista
     }
 
     /**
@@ -20,7 +21,7 @@ class AlumnoController extends Controller
      */
     public function create()
     {
-        //
+        return view('alumnos.create');
     }
 
     /**
@@ -28,7 +29,18 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'codigo' => 'required',
+            'nombre' => 'required',
+            'correo' => 'required|email|unique:alumnos,correo',
+            'fecha_nacimiento' => 'required|date',
+            'sexo' => 'required|in:M,F',
+            'carrera' => 'required',
+        ]);
+
+        Alumno::create($request->all());
+
+        return redirect()->route('alumnos.index');
     }
 
     /**
@@ -36,7 +48,7 @@ class AlumnoController extends Controller
      */
     public function show(Alumno $alumno)
     {
-        //
+        return view('alumnos.show', compact('alumno'));
     }
 
     /**
@@ -44,7 +56,7 @@ class AlumnoController extends Controller
      */
     public function edit(Alumno $alumno)
     {
-        //
+        return view('alumnos.edit', compact('alumno'));
     }
 
     /**
@@ -52,7 +64,18 @@ class AlumnoController extends Controller
      */
     public function update(Request $request, Alumno $alumno)
     {
-        //
+        $request->validate([
+            'codigo' => 'required',
+            'nombre' => 'required',
+            'correo' => 'required|email|unique:alumnos,correo,' . $alumno->id,
+            'fecha_nacimiento' => 'required|date',
+            'sexo' => 'required|in:M,F',
+            'carrera' => 'required',
+        ]);
+
+        $alumno->update($request->all());
+
+        return redirect()->route('alumnos.index');
     }
 
     /**
@@ -60,6 +83,7 @@ class AlumnoController extends Controller
      */
     public function destroy(Alumno $alumno)
     {
-        //
+        $alumno->delete();
+        return redirect()->route('alumnos.index');
     }
 }
