@@ -1,20 +1,19 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Detalles del Alumno</title>
-</head>
-<body>
-    <h1>Detalles del Alumno</h1>
+@extends('layout')
 
-    <p><strong>Código:</strong> {{ $alumno->codigo }}</p>
-    <p><strong>Nombre:</strong> {{ $alumno->nombre }}</p>
-    <p><strong>Correo:</strong> {{ $alumno->correo }}</p>
-    <p><strong>Fecha de nacimiento:</strong> {{ $alumno->fecha_nacimiento }}</p>
-    <p><strong>Sexo:</strong> {{ $alumno->sexo }}</p>
-    <p><strong>Carrera:</strong> {{ $alumno->carrera }}</p>
+@section('title', 'Detalle del Alumno')
 
-    <br>
-    <a href="{{ route('alumnos.index') }}">← Volver al listado</a>
-</body>
-</html>
+@section('content')
+<h1>Detalle del Alumno</h1>
+
+<ul class="list-group">
+    <li class="list-group-item"><strong>Código:</strong> {{ $alumno->codigo }}</li>
+    <li class="list-group-item"><strong>Nombre:</strong> {{ $alumno->nombre }}</li>
+    <li class="list-group-item"><strong>Correo:</strong> {{ $alumno->correo }}</li>
+    <li class="list-group-item"><strong>Fecha de nacimiento:</strong> {{ $alumno->fecha_nacimiento }}</li>
+    <li class="list-group-item"><strong>Sexo:</strong> {{ $alumno->sexo }}</li>
+    <li class="list-group-item"><strong>Carrera:</strong> {{ $alumno->carrera }}</li>
+</ul>
+
+<br>
+<a href="{{ route('alumnos.index') }}" class="btn btn-secondary">← Volver al listado</a>
+@endsection

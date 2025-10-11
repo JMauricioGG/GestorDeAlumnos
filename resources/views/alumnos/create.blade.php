@@ -1,39 +1,53 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Agregar Alumno</title>
-</head>
-<body>
-    <h1>Agregar Alumno</h1>
+@extends('layout')
 
-    <form action="{{ route('alumnos.store') }}" method="POST">
-        @csrf
-        <label>Código:</label>
-        <input type="text" name="codigo" required><br>
+@section('title', 'Agregar Alumno')
 
-        <label>Nombre:</label>
-        <input type="text" name="nombre" required><br>
+@section('content')
+<h1>Agregar Alumno</h1>
 
-        <label>Correo:</label>
-        <input type="email" name="correo" required><br>
+<form action="{{ route('alumnos.store') }}" method="POST">
+    @csrf
 
-        <label>Fecha de nacimiento:</label>
-        <input type="date" name="fecha_nacimiento" required><br>
+    <div class="mb-3">
+        <label class="form-label">Código:</label>
+        <input type="text" name="codigo" class="form-control" value="{{ old('codigo') }}">
+        @error('codigo') <span class="text-danger">{{ $message }}</span> @enderror
+    </div>
 
-        <label>Sexo:</label>
-        <select name="sexo" required>
-            <option value="M">Masculino</option>
-            <option value="F">Femenino</option>
-        </select><br>
+    <div class="mb-3">
+        <label class="form-label">Nombre:</label>
+        <input type="text" name="nombre" class="form-control" value="{{ old('nombre') }}">
+        @error('nombre') <span class="text-danger">{{ $message }}</span> @enderror
+    </div>
 
-        <label>Carrera:</label>
-        <input type="text" name="carrera" required><br><br>
+    <div class="mb-3">
+        <label class="form-label">Correo:</label>
+        <input type="email" name="correo" class="form-control" value="{{ old('correo') }}">
+        @error('correo') <span class="text-danger">{{ $message }}</span> @enderror
+    </div>
 
-        <button type="submit">Guardar</button>
-    </form>
+    <div class="mb-3">
+        <label class="form-label">Fecha de Nacimiento:</label>
+        <input type="date" name="fecha_nacimiento" class="form-control" value="{{ old('fecha_nacimiento') }}">
+        @error('fecha_nacimiento') <span class="text-danger">{{ $message }}</span> @enderror
+    </div>
 
-    <br>
-    <a href="{{ route('alumnos.index') }}">← Volver al listado</a>
-</body>
-</html>
+    <div class="mb-3">
+        <label class="form-label">Sexo:</label>
+        <select name="sexo" class="form-select">
+            <option value="M" {{ old('sexo') == 'M' ? 'selected' : '' }}>Masculino</option>
+            <option value="F" {{ old('sexo') == 'F' ? 'selected' : '' }}>Femenino</option>
+        </select>
+        @error('sexo') <span class="text-danger">{{ $message }}</span> @enderror
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Carrera:</label>
+        <input type="text" name="carrera" class="form-control" value="{{ old('carrera') }}">
+        @error('carrera') <span class="text-danger">{{ $message }}</span> @enderror
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{{ route('alumnos.index') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+@endsection

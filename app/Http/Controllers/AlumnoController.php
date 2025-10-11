@@ -28,20 +28,19 @@ class AlumnoController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'codigo' => 'required',
-            'nombre' => 'required',
-            'correo' => 'required|email|unique:alumnos,correo',
-            'fecha_nacimiento' => 'required|date',
-            'sexo' => 'required|in:M,F',
-            'carrera' => 'required',
-        ]);
+{
+    $request->validate([
+        'codigo' => 'required|string|max:255',
+        'nombre' => 'required|string|max:255',
+        'correo' => 'required|email|unique:alumnos,correo',
+        'fecha_nacimiento' => 'required|date',
+        'sexo' => 'required|in:M,F',
+        'carrera' => 'required|string|max:255',
+    ]);
 
-        Alumno::create($request->all());
-
-        return redirect()->route('alumnos.index');
-    }
+    Alumno::create($request->all());
+    return redirect()->route('alumnos.index')->with('success', 'Alumno creado correctamente.');
+}
 
     /**
      * Display the specified resource.
@@ -62,21 +61,21 @@ class AlumnoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Alumno $alumno)
-    {
-        $request->validate([
-            'codigo' => 'required',
-            'nombre' => 'required',
-            'correo' => 'required|email|unique:alumnos,correo,' . $alumno->id,
-            'fecha_nacimiento' => 'required|date',
-            'sexo' => 'required|in:M,F',
-            'carrera' => 'required',
-        ]);
+   public function update(Request $request, Alumno $alumno)
+{
+    $request->validate([
+        'codigo' => 'required|string|max:255',
+        'nombre' => 'required|string|max:255',
+        'correo' => 'required|email|unique:alumnos,correo,' . $alumno->id,
+        'fecha_nacimiento' => 'required|date',
+        'sexo' => 'required|in:M,F',
+        'carrera' => 'required|string|max:255',
+    ]);
 
-        $alumno->update($request->all());
+    $alumno->update($request->all());
+    return redirect()->route('alumnos.index')->with('success', 'Alumno actualizado correctamente.');
+}
 
-        return redirect()->route('alumnos.index');
-    }
 
     /**
      * Remove the specified resource from storage.
