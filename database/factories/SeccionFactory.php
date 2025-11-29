@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
  */
 class SeccionFactory extends Factory
 {
+   protected $model = \App\Models\Seccion::class;
     /**
      * Define the model's default state.
      *
@@ -17,7 +18,7 @@ class SeccionFactory extends Factory
     public function definition(): array
     {
         return [
-           'seccion'=> 'Seccion' . $this->faker->unique()->numberBetween(1,50), //
+           'seccion'=> $this->faker->word,
         'aula' =>'Aula' . $this->faker->numberBetween(1,20),
         ];
     }
