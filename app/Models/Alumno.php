@@ -15,4 +15,10 @@ class Alumno extends Model
         'sexo',
         'carrera'
     ];
+public function secciones()
+{
+return $this->belongsToMany(Seccion::class)->withTimestamps();
+
+}
+
 }

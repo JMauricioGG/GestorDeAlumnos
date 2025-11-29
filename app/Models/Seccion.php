@@ -9,4 +9,12 @@ class Seccion extends Model
 {
     /** @use HasFactory<\Database\Factories\SeccionFactory> */
     use HasFactory;
+
+
+    protected $fillable = ['seccion','aula'];
+
+    public function alumnos()
+    {
+        return $this->belongsToMany(Alumno::class)->withTimestamps();
+    }
 }

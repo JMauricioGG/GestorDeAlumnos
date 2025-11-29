@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Illuminate\Database\Seeder;
+use App\Models\Seccion;
 
 class SeccionSeeder extends Seeder
 {
@@ -12,6 +13,6 @@ class SeccionSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+     Seccion::factory(20)->create();   //
     }
 }
